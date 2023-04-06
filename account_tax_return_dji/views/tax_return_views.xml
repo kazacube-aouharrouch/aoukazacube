@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <template id="assets_backend" name="account_tax_return_dji assets" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/account_tax_return_dji/static/src/css/style.css" />
+            </xpath>
+        </template>
+
+</odoo>

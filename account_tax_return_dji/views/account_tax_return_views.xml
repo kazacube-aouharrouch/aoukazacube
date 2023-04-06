@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="account_tax_return_dji_views_form" model="ir.ui.view">
+            <field name="name">account.tax.return.dji.form</field>
+            <field name="model">account.tax.return.dji</field>
+            <field name="arch" type="xml">
+                <form string="Liasse Fiscal DJI">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <notebook>
+                            <page name="infos" string="informations">
+                                <group>
+                                    <group>
+                                        <field name="country_id" invisible="0" />
+                                        <field name="year" />
+                                        <field name="duration" readonly="1" />
+                                    </group>
+                                    <group>
+                                        <field name="date_start" />
+                                        <field name="date_close" />
+                                        <field name="nif" />
+                                        <field name="secu_number" />
+                                    </group>
+                                </group>
+                            </page>
+
+                        </notebook>
+                        <div class="row">
+                            <div class="col-2"><button string="SIG" name="button_print_sig"  type="object" class="btn btn-success"/></div>
+                            <div class="col-2"><button string="SIG DETAIL" name="button_print_sig_detail"  type="object" class="btn btn-success"/></div>
+                        </div>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="account_tax_return_dji_views_tree" model="ir.ui.view">
+            <field name="name">account.tax.return.dji.tree</field>
+            <field name="model">account.tax.return.dji</field>
+            <field name="arch" type="xml">
+                <tree string="Liasse Fiscal SYSCOHADA">
+                    <field name="name" />
+                    <field name="duration" />
+                    <field name="duration" />
+                    <field name="date_start" />
+                    <field name="date_close" />
+                    <field name="nif" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="account_tax_return_dji_views_search" model="ir.ui.view">
+            <field name="model">account.tax.return.dji</field>
+            <field name="arch" type="xml">
+                <search string="Liasse Fiscale DJI">
+                    <field name="name" filter_domain="['|',('name','ilike',self),('year','ilike',self)]" string="Liasse Fiscal"/>
+                    <separator/>
+                    <filter name="manager" string="Manager" domain="[('create_uid','=',uid)]"/>
+                    <field name="create_uid"/>
+
+                    <group expand="0" string="Group By">
+                        <filter name="owner" string="Owner" domain="[]" context="{'group_by':'create_uid'}"/>
+                        <filter name="created_month" string="Creation Month" domain="[]" context="{'group_by':'create_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="account_tax_return_dji_action" model="ir.actions.act_window">
+            <field name="name">Liasse Fiscale DJI</field>
+            <field name="res_model">account.tax.return.dji</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="account_tax_return_dji_views_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Clic pour ajouter une nouvelle liasse fiscale
+              </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_account_tax_return_dji_views_form">
+            <field name="act_window_id" ref="account_tax_return_dji_action"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account_tax_return_dji_views_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_account_tax_return_dji_views_tree">
+            <field name="act_window_id" ref="account_tax_return_dji_action"/>
+            <field name="sequence" eval="15"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="account_tax_return_dji_views_tree"/>
+        </record>
+
+        <menuitem id="menu_account_tax_return_dji"
+            parent="account.menu_finance_reports"
+            sequence="3"
+            name="fiscalité DJIBOUTI" />
+
+        <menuitem id="account_tax_return_item"
+            parent="menu_account_tax_return_dji"
+            sequence="10"
+            name="Liasse Fiscale"
+            action="account_tax_return_dji_action"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </data>
+</odoo>

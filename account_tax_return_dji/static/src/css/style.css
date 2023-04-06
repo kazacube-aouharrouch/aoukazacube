@@ -1,0 +1,164 @@
+
+.cover{
+    border: 1px solid black;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.border_margin{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.title{
+    color: blue;
+    font-size:20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.th{
+    text-align: center;
+    font-size:12px;
+    font-weight: bold;
+    background-color: #E3E6E7;
+    margin-top:5px;
+}
+.th_n{
+   border-top: 1px solid black;
+   padding-top:3px;
+}
+.td_line{
+     background-color: #ffffff;
+     color: #000022;
+}
+
+.td_x_line{
+     background-color: #4C6BBA;
+     color: #ffffff;
+}
+
+.td_b_line{
+     background-color: #9FAFD1;
+     color: #ffffff;
+}
+
+.td_xi_line{
+     background-color: #62c462;
+     color: #ffffff;
+}
+
+.table > tbody > tr > td {
+    padding: 1px;
+}
+
+.hr{
+    width:22%;
+    border-bottom: 1px dashed #000;
+    border-top: 0px #000;
+    border-left: 0px #000;
+    border-right: 0px #000;
+}
+.centre_depot{
+    text-transform:uppercase;
+}
+.ligne_ecriture{
+    border-bottom: 1px solid #000;
+    padding-bottom: 1px;
+    width:99%;
+    margin-left:10px;
+}
+.ligne{
+    border-bottom: 1px dashed #B2BABB;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+.b_left{
+    border-left: 1px solid #B2BABB;
+    padding-left:2px;
+}
+.b_right{
+    border-right: 1px solid #B2BABB;
+    padding-right:3px;
+}
+.b_left_right{
+    border-left: 1px solid #B2BABB;
+    border-right: 1px solid #B2BABB;
+    padding-left:2px;
+    padding-right:3px;
+}
+.case_color{
+    border-bottom: 2px solid black;
+    border-right: 1px solid black;
+    background-color: #B2BAFF;
+    font-weight: bold;
+    text-align: center;
+}
+.case_no_color{
+    border-top: 1px dashed #B2BABB;
+    border-bottom: 2px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background-color: #ffffff;
+    font-weight: bold;
+}
+.case_no_color2{
+    border-top: 1px dashed #B2BABB;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background-color: #ffffff;
+
+}
+.cadre_1{
+   margin: 12px;
+}
+.cadre_2{
+    margin: 12px;
+}
+.case_f{
+    border: 1px solid #000;
+    margin:1px;
+    padding:4px;
+    width:2px;
+}
+.case{
+    border: 1px solid #000;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+.cadre_1 > table > tbody > tr >  td{
+    border:1px solid #000;
+}
+.cadre_2 > table > tbody > tr >  td{
+    border:1px solid #000;
+}
+.bilan > table > tbody > tr >  td{
+    border:1px solid #000;
+}
+.cr > table > tbody > tr >  td{
+    border:1px solid #000;
+}
+
+.cadre{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.table > tbody > tr > td {
+    padding: 3px;
+}
+
+.tab > tbody > tr > td {
+    padding : 1px;
+    border:1px solid black;
+}
+.no_border_bottom{
+    border-bottom:1px; solid white;
+}
+.border_top_bottom{
+    border-bottom:1px; solid black;
+    border-top:1px; solid black;
+}

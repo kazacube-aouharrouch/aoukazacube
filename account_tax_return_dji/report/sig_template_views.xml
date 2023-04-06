@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+       <record id="paperformat_frenchcheck_sig" model="report.paperformat">
+             <field name="name">French Check sig</field>
+             <field name="default" eval="True"/>
+             <field name="margin_top">15</field> <!-- definir marge haut entete -->
+             <field name="margin_bottom">5</field> <!-- definir marge bas entete  -->
+             <field name="header_spacing">10</field> <!-- definir hauteur entete  -->
+             <field name="orientation">Portrait</field>
+        </record>
+
+       <report id="tax_return_sig_report"
+               model="account.tax.return.dji"
+               string="solde intermediare gestion "
+               report_type="qweb-pdf"
+               attachment_use="True"
+               name="account_tax_return_dji.tax_return_sig_action"
+               file="account_tax_return_dji.tax_return_sig_action"
+               print_report_name="'solde_intermediare_gestion_%s' % (object.get_year_n_chaine())"
+               paperformat="paperformat_frenchcheck_sig"
+               menu="False"
+       />
+
+       <template id="tax_return_sig_action">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="account_tax_return_dji.tax_return_sig_template" t-lang="user.lang"/>
+                </t>
+            </t>
+        </template>
+
+       <template id="tax_return_sig_template" >
+            <t t-foreach="docs" t-as="doc">
+
+                <t t-call="web.basic_layout">
+                    <div class="header" style="font-family:serif;font-size:1.0em;">
+                        <div class="row" style="margin-left:10px;">
+                            <div class="col-6">
+                                <div><strong><span t-field="doc.company_id.name"/></strong></div>
+                                <div><strong><span t-field="doc.company_id.city"/></strong></div>
+                            </div>
+                            <div class="col-6  text-right">
+                                <div>page <span class="page"/>/<span class="topage"/></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page" style="font-family:serif;font-size:1em;">
+                        <div class="" align="" style="border:1px solid black; padding:5px;padding-left:15px;">
+                            <strong>SOLDE INTERMEDIARE DE GESTION</strong>
+                        </div><br/>
+                        <table  class="table tab table-bordered">
+                            <tr class="th">
+                                <td rowspan="2" width="40%">
+                                    .
+                                </td>
+
+                                <td rowspan="2" align="center">
+                                    <div class="">Exercice N <br/>
+                                        <span t-esc="doc.get_date_year_n()"/>
+                                    </div>
+                                </td>
+                                <td rowspan="2">
+                                    %<br/>CA
+                                </td>
+                                <td rowspan="2" align="center">
+                                    <div class="">Exercice N-1 <br/>
+                                        <span t-esc="doc.get_date_year_n_1()"/>&#160; &#160; &#160;&#160; &#160; &#160;
+                                        <span t-field="doc.duration" />
+                                    </div>
+                                </td>
+                                <td rowspan="2">
+                                    %<br/>CA
+                                </td>
+                                <td align="center" style="border-left: 1px double black;" colspan="2">
+                                    Ecart N / N-1
+                                </td>
+
+                            </tr>
+                            <tr class="th">
+                                <td align="center">
+                                    Francs
+                                </td>
+                                <td align="center">
+                                    %
+                                </td>
+                            </tr>
+                            <t t-foreach="doc.sig_report_data_json_to_list()" t-as="value">
+                                <t t-if="value.get('ref') not in ['G_VMP','G_MC','G_PE','G_MBP','G_MBG','G_VA','G_EBE','G_REP','G_RCO','G_REX','G_RNE'] ">
+                                    <tr style="font-size:0.9em;" >
+                                            <td style="border-bottom:1px solid white;" align="left">&#160;&#160;&#160;<span t-esc="value.get('signe')"/>&#160;&#160;<span t-esc="value.get('libelle')"/></td>
+                                            <td style="border-bottom:1px solid white;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('solde_n'),' ')"/></td>
+                                            <td style="border-bottom:1px solid white;background-color:#E3E6E7;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('taux_n'),' ')"/></td>
+                                            <td style="border-bottom:1px solid white;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('solde_n_1'),' ')"/></td>
+                                            <td style="border-bottom:1px solid white;background-color:#E3E6E7;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('taux_n_1'),' ')"/></td>
+                                            <td style="border-bottom:1px solid white;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('ecart_n_n1'),' ')"/></td>
+                                            <td style="border-bottom:1px solid white;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('taux_ecart_n_n1'),' ')"/></td>
+                                    </tr>
+                                </t>
+                                <t t-if="value.get('ref') in ['G_VMP','G_MC','G_PE','G_MBP','G_MBG','G_VA','G_EBE','G_REP','G_RCO','G_REX','G_RNE'] ">
+                                    <tr class="th" style="font-size:1em;" >
+                                            <td style="padding:5px;border-bottom:1px solid black;border-top:1px solid black;" align="left"><strong>&#160;&#160;&#160;<span t-esc="value.get('libelle')"/></strong></td>
+                                            <td style="border-bottom:1px solid black;border-top:1px solid black;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('solde_n'),' ')"/></td>
+                                            <td style="border-bottom:1px solid black;border-top:1px solid black;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('taux_n'),' ')"/></td>
+                                            <td style="border-bottom:1px solid black;border-top:1px solid black;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('solde_n_1'),' ')"/></td>
+                                            <td style="border-bottom:1px solid black;border-top:1px solid black;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('taux_n_1'),' ')"/></td>
+                                            <td style="border-bottom:1px solid black;border-top:1px solid black;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('ecart_n_n1'),' ')"/></td>
+                                            <td style="border-bottom:1px solid black;border-top:1px solid black;" align="center"><span t-esc="doc.separateur_millier_with_vide(value.get('taux_ecart_n_n1'),' ')"/></td>
+                                    </tr>
+                                </t>
+
+                            </t>
+
+                        </table>
+
+                    </div>
+
+                </t>
+            </t>
+       </template>
+   </data>
+</odoo>
